@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/galano-grotesque-alt');
+
 table {
     border-collapse: collapse;
     margin-bottom: 10px;
@@ -12,7 +14,7 @@ th {
 }
 
 th {
-    background-color: #b15151;
+    background-color: #ED1970;
 }
 
 #gradientText {
@@ -43,13 +45,17 @@ label {
     font-weight: bold;
 }
 
+body {
+    font-family: 'Galano', sans-serif;
+  }
+
 #scoreboard {
     margin: 20px auto;
 }
 
 #scoreboard tr:first-child th.name,
 #scoreboard tr:first-child th.score {
-    border: 1px solid rgba(51, 51, 51, 0.5);
+    border: 1px solid #ED1970;
     padding: 8px;
     text-align: center;
 }
@@ -70,6 +76,7 @@ label {
     height: 100%;
     opacity: 0.8;
     z-index: -1;
+    object-fit: fill;
 }
 
 #input_fields,
@@ -94,4 +101,64 @@ h1 {
 
 #tr_3 {
     font-size: 30px;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgb(121, 98, 162);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(103, 58, 183);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.helper-text {
+  color: rgb(33, 174, 33);
+}
+
+#totalScore {
+  width: 100px;
+  padding: 7px;
+}
+
+#submitDiv {
+  display: flex;
+  margin: 50px auto;
+  justify-content: center;
+}
+
+#submitButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#submitButton:hover {
+  background-color: #45a049;
 }

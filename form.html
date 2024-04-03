@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="background-color: rgb(150, 124, 193)">
+  <div class="form-container">
+    <h2>Player Form</h2>
+    <form id="wordForm">
+      <label for="fullName">What is your full name?</label>
+      <input type="text" id="fullName" name="fullName" pattern="[A-Za-z\s]+" required>
+
+      <label for="email">What is your email address?</label>
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        required>
+
+      <label for="contactNumber">What is your contact number?</label>
+      <input 
+        type="tel" 
+        id="contactNumber"
+        name="contactNumber" 
+        required
+        title="Please enter a valid phone number">
+
+        <label for="totalScore">What is your total score? <span class="helper-text">(Please let our staff to help fill this in)</span></label>
+        <input 
+          type="text" 
+          id="totalScore" 
+          name="totalScore" 
+          step="1"
+          required>
+        <div id="submitDiv">
+          <input id="submitButton" type="submit">
+        </div> 
+    </form>
+  </div>
+
+  <script src="https://apis.google.com/js/api.js"></script>
+
+  <script>
+    // Google Sheets API configuration
+    const spreadsheetId = '1NV_OfArvAO5O0lWCMlnH4i098p9vi7grQjlM72E_g1o';
+    const range = 'Sheet1!A1:D1'; // Modify this to the desired range in your Sheet
+  
+    // Log the form data to Google Sheets
+    function logFormData(formData) {
+      gapi.load('client:auth2', () => {
+        gapi.client.init({
+          apiKey: 'AIzaSyD_KGS_K-_Sjt8AvWgnHcClq6kh9Qh03lM',
+          clientId: '821961966380-16ujucg2ratta52r4es2geh01s5c118k.apps.googleusercontent.com',
+          discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+          scope: 'https://www.googleapis.com/auth/spreadsheets',
+        }).then(() => {
+          return gapi.auth2.getAuthInstance().signIn();
+        }).then(() => {
+          const values = [
+            [
+              formData.fullName,
+              formData.email,
+              formData.contactNumber,
+              formData.totalScore,
+            ],
+          ];
+          return gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId,
+            range,
+            valueInputOption: 'RAW',
+            resource: {
+              values,
+            },
+          });
+        }).then(() => {
+          console.log('Form data submitted successfully');
+        }).catch((error) => {
+          console.error('Error submitting form data:', error);
+        });
+      });
+    }
+
+    document.getElementById("wordForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the values from the input fields
+      let fullName = document.getElementById("fullName").value;
+      let email = document.getElementById("email").value;
+      let contactNumber = document.getElementById("contactNumber").value;
+      let totalScore = document.getElementById("totalScore").value;
+
+      // Create an object with the entered values
+      let formData = {
+        fullName: fullName,
+        email: email,
+        contactNumber: contactNumber,
+        totalScore: totalScore
+      };
+
+      // Log the form data object
+      console.log(formData);
+      logFormData(formData);
+
+    // You can perform additional actions here or submit the form programmatically if needed
+    });
+  </script>
+</body>
+</html>

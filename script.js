@@ -102,3 +102,5 @@ scoreInput.addEventListener("keydown", function (event) {
         addToScoreboard();
     }
 });
+
+// ----------------------------
